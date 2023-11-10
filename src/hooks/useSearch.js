@@ -11,7 +11,7 @@ export function useSearch() {
       return
     }
 
-    if (search.startsWith(" ") || search === "") {
+    if (search === "") {
       return setErrorSearch("You can't search an empty field");
     }
 

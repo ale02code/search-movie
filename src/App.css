@@ -69,7 +69,6 @@
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
   overflow: hidden;
-  padding: 1rem;
 }
 
 .movie__container:hover {

@@ -1,41 +1,19 @@
-import { useEffect, useState } from "react";
 import { useMovies } from "./hooks/useMovies";
 import { useSearch } from "./hooks/useSearch";
 import Movies from "./components/Movies";
 import "./App.css";
-
+import { useEffect } from "react";
 function App() {
-  const { movies } = useMovies();
   const { search, updateSearch, errorSearch } = useSearch();
-  const [testSearch, setTestSearch] = useState("");
-
-  const handleChange = (event) => {
-    setTestSearch(event.target.value);
-
-    // const newSearch = event.target.value;
-    // updateSearch(newSearch);
-    // console.log(search);
-  };
-
-  useEffect(() => {
-    const API_KEY_MOVIES = "d3769c7";
-    const API_URL_MOVIES = `http://www.omdbapi.com/?apikey=${API_KEY_MOVIES}&s=${testSearch}`;
-
-    fetch(API_URL_MOVIES)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.Response === "False") {
-          return console.info("No movies found");
-        }
-
-        console.log(data);
-      });
-
-    console.log(testSearch);
-  }, [testSearch]);
+  const { movies, getMovies } = useMovies({ search });
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    getMovies();
+  };
+
+  const handleChange = (event) => {
+    updateSearch(event.target.value);
   };
 
   return (
