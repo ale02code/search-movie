@@ -1,0 +1,231 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.page__header__form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page__main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.movies {
+  width: 85%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(200px, 250px));
+  grid-template-rows: auto;
+  place-content: center;
+  padding: 0;
+  gap: 1.7rem;
+}
+
+.movie {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  list-style-type: none;
+  border: solid 1px #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform .5s ease-in-out;
+}
+
+.movie:hover {
+  transform: scale(1.1);
+}
+
+.movie img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+}
+
+.movie__container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background-color: #0009;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.movie__container:hover {
+  opacity: 1;
+}
+
+.movie__container__info {
+  color: #fff;
+}
+
+.movie__container__info h3,
+p {
+  margin: 0;
+  line-height: normal;
+}
+
+.movie__container__info h3 {
+  font-size: 2rem;
+}
+
+.movie__container__info p {
+  font-size: 1.2rem;
+}
+
+.movie__container__button button {
+  background-color: #3F51B5;
+}
+
+.movie__container__button button:hover {
+  background-color: #303F9F;
+}
+
+@media screen and (min-width: 664px) and (max-width: 900px) {
+  .movies {
+    grid-template-columns: repeat(3, minmax(200px, 250px));
+    gap: 10px;
+  }
+
+  .movie {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    list-style-type: none;
+    border: solid 1px #fff;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .movie:hover {
+    transform: none;
+  }
+
+  .movie__container {
+    height: 100%;
+    align-items: end;
+    justify-content: space-between;
+    flex-direction: row;
+    position: absolute;
+    bottom: 0;
+    opacity: 1;
+    padding: 6px;
+    background: linear-gradient(0deg, #000 8%, transparent 92%);
+  }
+
+  .movie__container__info h3 {
+    font-size: 1.5rem;
+  }
+
+  .movie__container__info p {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (min-width: 441px) and (max-width: 663px) {
+  .movies {
+    grid-template-columns: repeat(2, minmax(200px, 250px));
+    gap: 8px;
+  }
+
+  .movie {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    list-style-type: none;
+    border: solid 1px #fff;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .movie:hover {
+    transform: none;
+  }
+
+  .movie__container {
+    height: 100%;
+    align-items: end;
+    flex-direction: row;
+    position: absolute;
+    bottom: 0;
+    opacity: 1;
+    padding: 6px;
+    background: linear-gradient(0deg, #000 8%, transparent 92%);
+  }
+
+  .movie__container__info h3 {
+    font-size: 1.5rem;
+  }
+
+  .movie__container__info p {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width : 440px) {
+  .movies {
+    grid-template-columns: repeat(1, minmax(200px, 250px));
+    gap: 6px;
+  }
+
+  .movie {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    list-style-type: none;
+    border: solid 1px #fff;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .movie:hover {
+    transform: none;
+  }
+
+  .movie__container {
+    height: 100%;
+    justify-content: space-between;
+    align-items: end;
+    flex-direction: row;
+    position: absolute;
+    bottom: 0;
+    opacity: 1;
+    padding: 6px;
+    background: linear-gradient(0deg, #000 8%, transparent 92%);
+  }
+
+  .movie__container__info h3 {
+    font-size: 1.5rem;
+  }
+
+  .movie__container__info p {
+    font-size: 1rem;
+  }
+}
