@@ -14,6 +14,12 @@ function App() {
     console.log(search);
   };
 
+  useEffect(() => {
+    const API_KEY_MOVIES = "d3769c7";
+    const API_URL_MOVIES = `http://www.omdbapi.com/?apikey=${API_KEY_MOVIES}&=${search}`;
+    console.log(API_URL_MOVIES);
+  }, []);
+
   const handleSubmit = (event) => {
     event.preventDefault();
   };

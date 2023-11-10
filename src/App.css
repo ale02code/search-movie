@@ -9,6 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 1rem;
 }
 
 .page__main {
@@ -99,7 +100,11 @@ p {
   background-color: #303F9F;
 }
 
-@media screen and (min-width: 664px) and (max-width: 900px) {
+@media screen and (min-width: 664px) and (max-width: 1024px) {
+  .page__header__form {
+    margin: none;
+  }
+
   .movies {
     grid-template-columns: repeat(3, minmax(200px, 250px));
     gap: 10px;
@@ -144,6 +149,10 @@ p {
 }
 
 @media screen and (min-width: 441px) and (max-width: 663px) {
+  .page__header__form {
+    margin: none;
+  }
+
   .movies {
     grid-template-columns: repeat(2, minmax(200px, 250px));
     gap: 8px;
@@ -187,6 +196,10 @@ p {
 }
 
 @media only screen and (max-width : 440px) {
+  .page__header__form {
+    margin: none;
+  }
+
   .movies {
     grid-template-columns: repeat(1, minmax(200px, 250px));
     gap: 6px;
