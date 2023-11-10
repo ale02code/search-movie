@@ -5,6 +5,13 @@
   align-items: center;
 }
 
+.page__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .page__header__form {
   display: flex;
   justify-content: center;
