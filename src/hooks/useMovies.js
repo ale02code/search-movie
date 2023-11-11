@@ -15,7 +15,7 @@ export function useMovies({ search }) {
 
   function getMovies() {
     if (search) {
-      fetch(`http://www.omdbapi.com/?apikey=d3769c7&s=${search}`)
+      fetch(`https://www.omdbapi.com/?apikey=d3769c7&s=${search}`)
         .then((res) => res.json())
         .then((data) => {
           setResponsiveMovies(data);
