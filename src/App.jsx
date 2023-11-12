@@ -10,11 +10,14 @@ function App() {
   const { search, updateSearch, errorSearch } = useSearch();
   const { movies, getMovies, loading } = useMovies({ search, sort });
 
-  const debouncedGetMovies = useCallback(() => {
-    debounce((search) => {
-      getMovies({ search });
-    }, 300);
-  }, [getMovies]);
+  const debouncedGetMovies = useCallback(
+    ({ search }) => {
+      debounce((search) => {
+        getMovies({ search });
+      }, 300);
+    },
+    [getMovies]
+  );
 
   const handleSubmit = (event) => {
     event.preventDefault();
