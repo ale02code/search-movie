@@ -1,30 +1,34 @@
-import responseMovies from "../mocks/prev-results.json";
-import errorResponseMovies from "../mocks/prev-results-error.json";
-import { useState } from "react";
+import { searchMovies } from "../services/movie";
+import { useMemo, useRef, useState, useCallback } from "react";
 
-export function useMovies({ search }) {
-  const [responsiveMovies, setResponsiveMovies] = useState([]);
-  const movies = responsiveMovies?.Search;
+export function useMovies({ search, sort }) {
+  const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const retrySearch = useRef(search);
 
-  const mappedMovies = movies?.map((movie) => ({
-    id: movie.imdbID,
-    title: movie.Title,
-    year: movie.Year,
-    image: movie.Poster
-  }));
+  const getMovies = useCallback(async ({ search }) => {
+    if (search === retrySearch.current) return;
 
-  function getMovies() {
-    if (search) {
-      fetch(`https://www.omdbapi.com/?apikey=d3769c7&s=${search}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setResponsiveMovies(data);
-        })
-    } else {
-      setResponsiveMovies(errorResponseMovies);
-      console.log(errorResponseMovies)
+    try {
+      setLoading(true);
+      setError(null);
+      retrySearch.current = search;
+      const newMovies = await searchMovies({ search });
+      setMovies(newMovies);
+    } catch (error) {
+      setError(error.massage);
+    } finally {
+      setLoading(false);
+      console.log("fetching movies finished");
     }
-  }
+  }, []);
 
-  return { movies: mappedMovies, getMovies };
+  const sortedMovies = useMemo(() => {
+    return sort
+      ? [...movies].sort((a, b) => a.title.localeCompare(b.title))
+      : movies;
+  }, [sort, movies]);
+
+  return { movies: sortedMovies, getMovies, loading };
 }

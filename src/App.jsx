@@ -1,19 +1,42 @@
+import { useCallback, useEffect, useState } from "react";
 import { useMovies } from "./hooks/useMovies";
 import { useSearch } from "./hooks/useSearch";
 import Movies from "./components/Movies";
+import debounce from "just-debounce-it";
 import "./App.css";
-import { useEffect } from "react";
+
 function App() {
+  const [sort, setSort] = useState(false);
   const { search, updateSearch, errorSearch } = useSearch();
-  const { movies, getMovies } = useMovies({ search });
+  const { movies, getMovies, loading } = useMovies({ search, sort });
+
+  const debouncedGetMovies = useCallback(() => {
+    debounce((search) => {
+      getMovies({ search });
+    }, 300);
+  }, [getMovies]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    getMovies();
+    getMovies({ search });
   };
 
   const handleChange = (event) => {
+    const newMovie = event.target.value;
     updateSearch(event.target.value);
+    getMovies({ search: newMovie });
+  };
+
+  const handleSortChange = (event) => {
+    const selectedValue = event.target.value;
+
+    if (selectedValue === "default") {
+      setSort(false);
+    }
+
+    if (selectedValue === "sort-on") {
+      setSort(true);
+    }
   };
 
   return (
@@ -25,10 +48,13 @@ function App() {
             onChange={handleChange}
             name="search"
             title="Complete this field"
-            autoComplete="off"
             type="text"
             placeholder="Star wars, iron man..."
           />
+          <select name="sort-movies" onChange={handleSortChange}>
+            <option value="default">Def</option>
+            <option value="sort-on">A-Z</option>
+          </select>
           <button type="submit">Search</button>
         </form>
 
@@ -38,7 +64,7 @@ function App() {
       </header>
 
       <main className="page__main">
-        <Movies movies={movies} />
+        {loading ? <p>Loading...</p> : <Movies movies={movies} />}
       </main>
     </div>
   );
