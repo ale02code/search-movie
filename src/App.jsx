@@ -51,6 +51,7 @@ function App() {
             onChange={handleChange}
             name="search"
             title="Complete this field"
+            autoFocus="on"
             type="text"
             placeholder="Star wars, iron man..."
           />
